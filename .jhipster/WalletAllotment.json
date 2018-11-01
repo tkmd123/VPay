@@ -1,0 +1,38 @@
+{
+    "name": "WalletAllotment",
+    "fields": [
+        {
+            "fieldName": "walletAllotmentAmount",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "partner",
+            "otherEntityName": "partner",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "wallet",
+            "otherEntityName": "wallet",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "walletAllotment",
+            "otherEntityName": "walletTransaction",
+            "otherEntityRelationshipName": "walletAllotment"
+        }
+    ],
+    "changelogDate": "20181101055221",
+    "entityTableName": "wallet_allotment",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

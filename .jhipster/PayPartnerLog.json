@@ -1,0 +1,21 @@
+{
+    "name": "PayPartnerLog",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipName": "payPartner",
+            "otherEntityName": "payPartner",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181101055223",
+    "entityTableName": "pay_partner_log",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,41 @@
+{
+    "name": "WalletTransctionType",
+    "fields": [
+        {
+            "fieldName": "walletTransTypeCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransTypeName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransTypeDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransTypeFlag",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "walletTransType",
+            "otherEntityName": "walletTransaction",
+            "otherEntityRelationshipName": "walletTransctionType"
+        }
+    ],
+    "changelogDate": "20181101055217",
+    "entityTableName": "wallet_transction_type",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

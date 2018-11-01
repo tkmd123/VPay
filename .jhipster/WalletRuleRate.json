@@ -1,0 +1,46 @@
+{
+    "name": "WalletRuleRate",
+    "fields": [
+        {
+            "fieldName": "walletRuleRateCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletRuleRateName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletRuleRateDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletRuleRateFromValue",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "walletRuleRateToValue",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "walletRuleRateDiscount",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "walletRule",
+            "otherEntityName": "walletRule",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181101055220",
+    "entityTableName": "wallet_rule_rate",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

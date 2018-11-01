@@ -1,0 +1,44 @@
+{
+    "name": "Partner",
+    "fields": [
+        {
+            "fieldName": "partnerCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "partnerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "partnerDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "partnerOrder",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "partner",
+            "otherEntityName": "walletAllotment",
+            "otherEntityRelationshipName": "partner"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "partner",
+            "otherEntityName": "partnerLog",
+            "otherEntityRelationshipName": "partner"
+        }
+    ],
+    "changelogDate": "20181101055215",
+    "entityTableName": "partner",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

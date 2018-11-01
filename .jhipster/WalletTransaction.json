@@ -1,0 +1,27 @@
+{
+    "name": "WalletTransaction",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipName": "walletTransctionType",
+            "otherEntityName": "walletTransctionType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "walletAllotment",
+            "otherEntityName": "walletAllotment",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181101055222",
+    "entityTableName": "wallet_transaction",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,40 @@
+{
+    "name": "WalletType",
+    "fields": [
+        {
+            "fieldName": "walletTypeCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTypeName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTypeDesc",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "walletType",
+            "otherEntityName": "wallet",
+            "otherEntityRelationshipName": "walletType"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "walletType",
+            "otherEntityName": "walletRule",
+            "otherEntityRelationshipName": "walletType"
+        }
+    ],
+    "changelogDate": "20181101055214",
+    "entityTableName": "wallet_type",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,54 @@
+{
+    "name": "WalletRule",
+    "fields": [
+        {
+            "fieldName": "walletRuleCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletRuleName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletRuleDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletRuleFromDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "walletRuleToDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "walletType",
+            "otherEntityName": "walletType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "payPartner",
+            "otherEntityName": "payPartner",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "walletRule",
+            "otherEntityName": "walletRuleRate",
+            "otherEntityRelationshipName": "walletRule"
+        }
+    ],
+    "changelogDate": "20181101055219",
+    "entityTableName": "wallet_rule",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

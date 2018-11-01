@@ -1,0 +1,72 @@
+entity WalletType {
+	walletTypeCode String,
+    walletTypeName String,
+    walletTypeDesc String
+}
+
+entity Partner {
+partnerCode String,
+partnerName String,
+partnerDesc String,
+partnerOrder Integer
+}
+
+entity PayPartner {
+payPartnerCode String,
+payPartnerName String,
+payParterDesc String
+}
+
+entity WalletTransctionType {
+walletTransTypeCode String,
+walletTransTypeName String,
+walletTransTypeDesc String,
+walletTransTypeFlag Integer required
+}
+entity Wallet {
+walletNumber String required,
+walletIsActive Boolean required,
+walletDesc String
+}
+
+entity WalletRule {
+walletRuleCode String,
+walletRuleName String,
+walletRuleDesc String,
+walletRuleFromDate Instant,
+walletRuleToDate Instant
+}
+
+entity WalletRuleRate {
+walletRuleRateCode String,
+walletRuleRateName String,
+walletRuleRateDesc String,
+walletRuleRateFromValue Long,
+walletRuleRateToValue Long,
+walletRuleRateDiscount Long
+}
+
+entity WalletAllotment {
+walletAllotmentAmount Long,
+}
+
+entity WalletTransaction {
+}
+entity PayPartnerLog {
+}
+entity PartnerLog {
+}
+// Relationship
+relationship OneToMany {
+PayPartner{payPartner} to Wallet,
+PayPartner{payPartner} to WalletRule,
+WalletType{walletType} to Wallet,
+WalletType{walletType} to WalletRule,
+WalletRule{walletRule} to WalletRuleRate,
+Wallet{wallet} to WalletAllotment,
+Partner{partner} to WalletAllotment,
+WalletTransctionType{walletTransType} to WalletTransaction,
+WalletAllotment{walletAllotment} to WalletTransaction
+Partner{partner} to PartnerLog,
+PayPartner{payPartner} to PayPartnerLog
+}

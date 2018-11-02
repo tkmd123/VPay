@@ -1,0 +1,68 @@
+{
+    "name": "WalletTransaction",
+    "fields": [
+        {
+            "fieldName": "walletTransAmount",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "walletTransDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "walletTransRef",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransUsername",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransUDF1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransUDF2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransUDF3",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "walletTransactionType",
+            "otherEntityName": "walletTransactionType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "wallet",
+            "otherEntityName": "wallet",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "walletTransaction",
+            "otherEntityName": "partnerTransaction",
+            "otherEntityRelationshipName": "walletTransaction"
+        }
+    ],
+    "changelogDate": "20181102082839",
+    "entityTableName": "wallet_transaction",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,64 @@
+{
+    "name": "PayPartner",
+    "fields": [
+        {
+            "fieldName": "payPartnerCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "payPartnerName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "payPartnerDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "payPartnerUDF1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "payPartnerUDF2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "payPartnerUDF3",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "payPartner",
+            "otherEntityName": "wallet",
+            "otherEntityRelationshipName": "payPartner"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "payPartner",
+            "otherEntityName": "walletRule",
+            "otherEntityRelationshipName": "payPartner"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "payPartner",
+            "otherEntityName": "payPartnerLog",
+            "otherEntityRelationshipName": "payPartner"
+        }
+    ],
+    "changelogDate": "20181102082834",
+    "entityTableName": "pay_partner",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

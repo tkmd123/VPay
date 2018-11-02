@@ -1,0 +1,53 @@
+{
+    "name": "Product",
+    "fields": [
+        {
+            "fieldName": "productCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "productName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "productDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productUDF1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productUDF2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productUDF3",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "productType",
+            "otherEntityName": "productType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181102082832",
+    "javadoc": "Product: VN: 50k, VN: 100k\nVT: 50k, VT: 100k",
+    "entityTableName": "product",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

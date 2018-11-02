@@ -1,0 +1,60 @@
+{
+    "name": "WalletTransactionType",
+    "fields": [
+        {
+            "fieldName": "walletTransTypeCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "walletTransTypeName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "walletTransTypeDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransTypeFlag",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "walletTransTypeUDF1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransTypeUDF2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "walletTransTypeUDF3",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "walletTransType",
+            "otherEntityName": "walletTransaction",
+            "otherEntityRelationshipName": "walletTransactionType"
+        }
+    ],
+    "changelogDate": "20181102051538",
+    "javadoc": "DEBIT, CREDIT, CANCEL",
+    "entityTableName": "wallet_transaction_type",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

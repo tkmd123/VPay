@@ -1,0 +1,148 @@
+package vpay.homtech.vn.web.rest;
+
+import com.codahale.metrics.annotation.Timed;
+import vpay.homtech.vn.domain.WalletTransactionType;
+import vpay.homtech.vn.repository.WalletTransactionTypeRepository;
+import vpay.homtech.vn.repository.search.WalletTransactionTypeSearchRepository;
+import vpay.homtech.vn.web.rest.errors.BadRequestAlertException;
+import vpay.homtech.vn.web.rest.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
+
+/**
+ * REST controller for managing WalletTransactionType.
+ */
+@RestController
+@RequestMapping("/api")
+public class WalletTransactionTypeResource {
+
+    private final Logger log = LoggerFactory.getLogger(WalletTransactionTypeResource.class);
+
+    private static final String ENTITY_NAME = "walletTransactionType";
+
+    private WalletTransactionTypeRepository walletTransactionTypeRepository;
+
+    private WalletTransactionTypeSearchRepository walletTransactionTypeSearchRepository;
+
+    public WalletTransactionTypeResource(WalletTransactionTypeRepository walletTransactionTypeRepository, WalletTransactionTypeSearchRepository walletTransactionTypeSearchRepository) {
+        this.walletTransactionTypeRepository = walletTransactionTypeRepository;
+        this.walletTransactionTypeSearchRepository = walletTransactionTypeSearchRepository;
+    }
+
+    /**
+     * POST  /wallet-transaction-types : Create a new walletTransactionType.
+     *
+     * @param walletTransactionType the walletTransactionType to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new walletTransactionType, or with status 400 (Bad Request) if the walletTransactionType has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/wallet-transaction-types")
+    @Timed
+    public ResponseEntity<WalletTransactionType> createWalletTransactionType(@Valid @RequestBody WalletTransactionType walletTransactionType) throws URISyntaxException {
+        log.debug("REST request to save WalletTransactionType : {}", walletTransactionType);
+        if (walletTransactionType.getId() != null) {
+            throw new BadRequestAlertException("A new walletTransactionType cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        WalletTransactionType result = walletTransactionTypeRepository.save(walletTransactionType);
+        walletTransactionTypeSearchRepository.save(result);
+        return ResponseEntity.created(new URI("/api/wallet-transaction-types/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * PUT  /wallet-transaction-types : Updates an existing walletTransactionType.
+     *
+     * @param walletTransactionType the walletTransactionType to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated walletTransactionType,
+     * or with status 400 (Bad Request) if the walletTransactionType is not valid,
+     * or with status 500 (Internal Server Error) if the walletTransactionType couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PutMapping("/wallet-transaction-types")
+    @Timed
+    public ResponseEntity<WalletTransactionType> updateWalletTransactionType(@Valid @RequestBody WalletTransactionType walletTransactionType) throws URISyntaxException {
+        log.debug("REST request to update WalletTransactionType : {}", walletTransactionType);
+        if (walletTransactionType.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        WalletTransactionType result = walletTransactionTypeRepository.save(walletTransactionType);
+        walletTransactionTypeSearchRepository.save(result);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, walletTransactionType.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * GET  /wallet-transaction-types : get all the walletTransactionTypes.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of walletTransactionTypes in body
+     */
+    @GetMapping("/wallet-transaction-types")
+    @Timed
+    public List<WalletTransactionType> getAllWalletTransactionTypes() {
+        log.debug("REST request to get all WalletTransactionTypes");
+        return walletTransactionTypeRepository.findAll();
+    }
+
+    /**
+     * GET  /wallet-transaction-types/:id : get the "id" walletTransactionType.
+     *
+     * @param id the id of the walletTransactionType to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the walletTransactionType, or with status 404 (Not Found)
+     */
+    @GetMapping("/wallet-transaction-types/{id}")
+    @Timed
+    public ResponseEntity<WalletTransactionType> getWalletTransactionType(@PathVariable Long id) {
+        log.debug("REST request to get WalletTransactionType : {}", id);
+        Optional<WalletTransactionType> walletTransactionType = walletTransactionTypeRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(walletTransactionType);
+    }
+
+    /**
+     * DELETE  /wallet-transaction-types/:id : delete the "id" walletTransactionType.
+     *
+     * @param id the id of the walletTransactionType to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/wallet-transaction-types/{id}")
+    @Timed
+    public ResponseEntity<Void> deleteWalletTransactionType(@PathVariable Long id) {
+        log.debug("REST request to delete WalletTransactionType : {}", id);
+
+        walletTransactionTypeRepository.deleteById(id);
+        walletTransactionTypeSearchRepository.deleteById(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * SEARCH  /_search/wallet-transaction-types?query=:query : search for the walletTransactionType corresponding
+     * to the query.
+     *
+     * @param query the query of the walletTransactionType search
+     * @return the result of the search
+     */
+    @GetMapping("/_search/wallet-transaction-types")
+    @Timed
+    public List<WalletTransactionType> searchWalletTransactionTypes(@RequestParam String query) {
+        log.debug("REST request to search WalletTransactionTypes for query {}", query);
+        return StreamSupport
+            .stream(walletTransactionTypeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .collect(Collectors.toList());
+    }
+
+}

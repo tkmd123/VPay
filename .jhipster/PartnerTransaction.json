@@ -1,0 +1,68 @@
+{
+    "name": "PartnerTransaction",
+    "fields": [
+        {
+            "fieldName": "partnerTransAmount",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "partnerTransDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "partnerTransRef",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "partnerTransUsername",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "partnerTransUDF1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "partnerTransUDF2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "partnerTransUDF3",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "productType",
+            "otherEntityName": "productType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "partner",
+            "otherEntityName": "partner",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "walletTransaction",
+            "otherEntityName": "walletTransaction",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181102051543",
+    "entityTableName": "partner_transaction",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

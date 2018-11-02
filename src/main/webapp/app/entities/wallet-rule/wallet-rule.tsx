@@ -1,0 +1,159 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link, RouteComponentProps } from 'react-router-dom';
+import { Button, InputGroup, Col, Row, Table } from 'reactstrap';
+import { AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
+// tslint:disable-next-line:no-unused-variable
+import { ICrudSearchAction, ICrudGetAllAction, TextFormat } from 'react-jhipster';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { IRootState } from 'app/shared/reducers';
+import { getSearchEntities, getEntities } from './wallet-rule.reducer';
+import { IWalletRule } from 'app/shared/model/wallet-rule.model';
+// tslint:disable-next-line:no-unused-variable
+import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+
+export interface IWalletRuleProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
+
+export interface IWalletRuleState {
+  search: string;
+}
+
+export class WalletRule extends React.Component<IWalletRuleProps, IWalletRuleState> {
+  state: IWalletRuleState = {
+    search: ''
+  };
+
+  componentDidMount() {
+    this.props.getEntities();
+  }
+
+  search = () => {
+    if (this.state.search) {
+      this.props.getSearchEntities(this.state.search);
+    }
+  };
+
+  clear = () => {
+    this.props.getEntities();
+    this.setState({
+      search: ''
+    });
+  };
+
+  handleSearch = event => this.setState({ search: event.target.value });
+
+  render() {
+    const { walletRuleList, match } = this.props;
+    return (
+      <div>
+        <h2 id="wallet-rule-heading">
+          Wallet Rules
+          <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
+            <FontAwesomeIcon icon="plus" />&nbsp; Create new Wallet Rule
+          </Link>
+        </h2>
+        <Row>
+          <Col sm="12">
+            <AvForm onSubmit={this.search}>
+              <AvGroup>
+                <InputGroup>
+                  <AvInput type="text" name="search" value={this.state.search} onChange={this.handleSearch} placeholder="Search" />
+                  <Button className="input-group-addon">
+                    <FontAwesomeIcon icon="search" />
+                  </Button>
+                  <Button type="reset" className="input-group-addon" onClick={this.clear}>
+                    <FontAwesomeIcon icon="trash" />
+                  </Button>
+                </InputGroup>
+              </AvGroup>
+            </AvForm>
+          </Col>
+        </Row>
+        <div className="table-responsive">
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Wallet Rule Code</th>
+                <th>Wallet Rule Name</th>
+                <th>Wallet Rule Desc</th>
+                <th>Wallet Rule From Date</th>
+                <th>Wallet Rule To Date</th>
+                <th>Wallet Rule UDF 1</th>
+                <th>Wallet Rule UDF 2</th>
+                <th>Wallet Rule UDF 3</th>
+                <th>Product Type</th>
+                <th>Pay Partner</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {walletRuleList.map((walletRule, i) => (
+                <tr key={`entity-${i}`}>
+                  <td>
+                    <Button tag={Link} to={`${match.url}/${walletRule.id}`} color="link" size="sm">
+                      {walletRule.id}
+                    </Button>
+                  </td>
+                  <td>{walletRule.walletRuleCode}</td>
+                  <td>{walletRule.walletRuleName}</td>
+                  <td>{walletRule.walletRuleDesc}</td>
+                  <td>
+                    <TextFormat type="date" value={walletRule.walletRuleFromDate} format={APP_DATE_FORMAT} />
+                  </td>
+                  <td>
+                    <TextFormat type="date" value={walletRule.walletRuleToDate} format={APP_DATE_FORMAT} />
+                  </td>
+                  <td>{walletRule.walletRuleUDF1}</td>
+                  <td>{walletRule.walletRuleUDF2}</td>
+                  <td>{walletRule.walletRuleUDF3}</td>
+                  <td>
+                    {walletRule.productType ? (
+                      <Link to={`product-type/${walletRule.productType.id}`}>{walletRule.productType.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>
+                    {walletRule.payPartner ? <Link to={`pay-partner/${walletRule.payPartner.id}`}>{walletRule.payPartner.id}</Link> : ''}
+                  </td>
+                  <td className="text-right">
+                    <div className="btn-group flex-btn-group-container">
+                      <Button tag={Link} to={`${match.url}/${walletRule.id}`} color="info" size="sm">
+                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                      </Button>
+                      <Button tag={Link} to={`${match.url}/${walletRule.id}/edit`} color="primary" size="sm">
+                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                      </Button>
+                      <Button tag={Link} to={`${match.url}/${walletRule.id}/delete`} color="danger" size="sm">
+                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = ({ walletRule }: IRootState) => ({
+  walletRuleList: walletRule.entities
+});
+
+const mapDispatchToProps = {
+  getSearchEntities,
+  getEntities
+};
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WalletRule);

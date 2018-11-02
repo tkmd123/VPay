@@ -1,0 +1,71 @@
+{
+    "name": "ProductType",
+    "fields": [
+        {
+            "fieldName": "productTypeCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "productTypeName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "productTypeDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productUDF1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productUDF2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productUDF3",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "productType",
+            "otherEntityName": "product",
+            "otherEntityRelationshipName": "productType"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "productType",
+            "otherEntityName": "wallet",
+            "otherEntityRelationshipName": "productType"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "productType",
+            "otherEntityName": "walletRule",
+            "otherEntityRelationshipName": "productType"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "productType",
+            "otherEntityName": "partnerTransaction",
+            "otherEntityRelationshipName": "productType"
+        }
+    ],
+    "changelogDate": "20181102051534",
+    "javadoc": "ProductType: VN, VT, MB, VTC, ...",
+    "entityTableName": "product_type",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

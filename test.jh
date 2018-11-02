@@ -1,0 +1,163 @@
+/**
+* ProductType: VN, VT, MB, VTC, ...
+*/
+entity ProductType{
+productTypeCode String required,
+productTypeName String required,
+productTypeDesc String,
+productUDF1 String,
+productUDF2 String,
+productUDF3 String
+}
+/**
+* Product: VN: 50k, VN: 100k
+* VT: 50k, VT: 100k
+*/
+entity Product {
+	productCode String required,
+    productName String required,
+    productDesc String,
+    productUDF1 String,
+    productUDF2 String,
+    productUDF3 String
+}
+
+/**
+* Partner: VTC, Viettel, Media
+*/
+entity Partner {
+partnerCode String required,
+partnerName String required,
+partnerDesc String,
+partnerOrder Integer required,
+partnerAPIUsername String,
+partnerAPIPassword String,
+partnerUDF1 String,
+partnerUDF2 String,
+partnerUDF3 String
+}
+
+entity PayPartner {
+payPartnerCode String required,
+payPartnerName String required,
+payPartnerDesc String,
+payPartnerUDF1 String,
+payPartnerUDF2 String,
+payPartnerUDF3 String
+}
+/**
+* DEBIT, CREDIT, CANCEL
+*/
+entity WalletTransactionType {
+walletTransTypeCode String required,
+walletTransTypeName String required,
+walletTransTypeDesc String,
+walletTransTypeFlag Integer required,
+walletTransTypeUDF1 String,
+walletTransTypeUDF2 String,
+walletTransTypeUDF3 String
+}
+entity Wallet {
+walletNumber String required,
+walletIsActive Boolean required,
+walletDesc String,
+walletUDF1 String,
+walletUDF2 String,
+walletUDF3 String
+}
+
+entity WalletRule {
+walletRuleCode String required,
+walletRuleName String required,
+walletRuleDesc String,
+walletRuleFromDate Instant required,
+walletRuleToDate Instant required,
+walletRuleUDF1 String,
+walletRuleUDF2 String,
+walletRuleUDF3 String
+}
+
+entity WalletRuleRate {
+walletRuleRateCode String required,
+walletRuleRateName String required,
+walletRuleRateDesc String,
+walletRuleRateFromValue Long required,
+walletRuleRateToValue Long required,
+walletRuleRateDiscount Long required,
+walletRuleRateUDF1 String,
+walletRuleRateUDF2 String,
+walletRuleRateUDF3 String
+}
+
+entity WalletTransaction {
+walletTransAmount Long required,
+walletTransDate Instant required,
+walletTransRef String,
+walletTransUsername String,
+walletTransUDF1 String,
+walletTransUDF2 String,
+walletTransUDF3 String
+}
+entity PartnerTransaction {
+partnerTransAmount Long required,
+partnerTransDate Instant required,
+partnerTransRef String,
+partnerTransUsername String,
+partnerTransUDF1 String,
+partnerTransUDF2 String,
+partnerTransUDF3 String
+}
+
+entity PayPartnerLog {
+payLogAmount String,
+payLogTransRef String,
+payLogUsername String,
+payLogProductTypeCode String,
+payLogResuleCode String,
+payLogResuleDesc String,
+payLogDate Instant,
+payLogUDF1 String,
+payLogUDF2 String,
+payLogUDF3 String,
+payLogUDF4 String,
+payLogUDF5 String
+}
+entity PartnerLog {
+partnerLogAmount String,
+partnerLogTransRef String,
+partnerLogUsername String,
+partnerLogProductTypeCode String,
+partnerLogResultCode String,
+partnerLogResultDesc String,
+partnerLogDate Instant,
+partnerLogUDF1 String,
+partnerLogUDF2 String,
+partnerLogUDF3 String,
+partnerLogUDF4 String,
+partnerLogUDF5 String
+}
+// Relationship
+relationship OneToMany {
+PayPartner{payPartner(payPartnerName)} to Wallet,
+PayPartner{payPartner(payPartnerName)} to WalletRule,
+ProductType{productType(productTypeName)} to Product,
+ProductType{productType(productTypeName)} to Wallet,
+ProductType{productType(productTypeName)} to WalletRule,
+ProductType{productType} to PartnerTransaction,
+WalletRule{walletRule(walletRuleName)} to WalletRuleRate,
+Wallet{wallet} to WalletTransaction,
+Partner{partner(partnerName)} to Wallet,
+WalletTransactionType{walletTransType} to WalletTransaction,
+Partner{partner} to PartnerLog,
+WalletTransaction{walletTransaction} to PartnerTransaction,
+Partner{partner} to PartnerTransaction,
+PayPartner{payPartner} to PayPartnerLog
+}
+
+
+// Set pagination options
+paginate ProductType, PayPartner, Partner, WalletRule, WalletTransactionType  with infinite-scroll
+paginate Wallet, Product, WalletRuleRate, PartnerTransaction, WalletTransaction, 
+		PayPartnerLog, PartnerLog	with pagination
+
+
